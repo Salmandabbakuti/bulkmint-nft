@@ -7,6 +7,8 @@ bin-release/
 # Other files and folders
 .settings/
 node_modules/
+.deps/
+artifacts/
 package-lock.json
 
 # Executables

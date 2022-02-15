@@ -82,8 +82,9 @@ export default function App() {
     try {
       const currentTokenId = await contract.currentTokenId();
       const tokenIds = Array(records.length).fill().map((_, i) => i + currentTokenId.toNumber());
-      const tokenAmounts = Array(tokenIds.length).fill(1);
-      const metadatas = records.map(({ name, description, image, external_url, ...rest }) => ({ name, description, image, external_url, properties: rest }));
+      // const tokenAmounts = Array(tokenIds.length).fill(1);
+      const tokenAmounts = records.map(({ quantity }) => quantity);
+      const metadatas = records.map(({ name, description, image, external_url, quantity, ...rest }) => ({ name, description, image, external_url, properties: rest }));
       const tokenURIs = await Promise.all(metadatas.map(async (metadata) => {
         const { path } = await ipfsClient.add(JSON.stringify(metadata));
         return `https://ipfs.io/ipfs/${path}`;
